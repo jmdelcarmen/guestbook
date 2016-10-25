@@ -1,0 +1,18 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: white !important;
+  text-decoration: none;
+  padding: 1em;
+}
+
+table {
+  color: white !important;
+}
+
+button:hover {
+  cursor: pointer;
+}
