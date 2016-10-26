@@ -1,18 +1,172 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #45ADA8;
 }
 
-a {
-  color: white !important;
+a, a:hover {
   text-decoration: none;
-  padding: 1em;
+  font-weight: bold;
 }
 
-table {
-  color: white !important;
+h1 {
+  color: #195066;
+  text-transform: uppercase;
+  font-size: 2.5em;
+  margin-bottom: 1.5em;
 }
 
 button:hover {
   cursor: pointer;
+}
+
+.guestlist-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.col-xs-12 {
+  background: #247291;
+  color: white;
+  flex-grow: 1;
+  padding: .5em;
+  border-radius: 3px;
+  border: 3.5px solid rgba(255, 255, 255, 0.6);
+  margin: .5%;
+}
+
+
+.guest-info {
+  position: relative;
+}
+
+.guest-date {
+  color: #444;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: .75em;
+  padding: 5px 8px;
+  background: #F8DA5B;
+  border-radius: 2px;
+  border: 2px solid #444;
+}
+
+.guest-name {
+  text-align: center;
+  font-size: .95em;
+  margin-left: 1em;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 2.7em;
+  margin-bottom: 1.5em;
+  color: ivory;
+}
+
+.guest-message {
+  font-size: 13px;
+  margin: 0 auto;
+  width: 95%;
+  min-height: 100px;
+  margin-bottom: 3em;
+  background: rgba(0, 0, 0, 0.3);
+  padding: .7em;
+}
+
+.fa-trash {
+  position: absolute;
+  bottom: -3px;
+  right: 0px;
+  font-size: 1.25em;
+  padding: 10px;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.fa-trash:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+
+
+
+/*************************FORM**************************/
+
+.form-wrapper{
+  border: 1px solid black;
+  width: 95%;
+  max-width: 400px;
+  margin-top: 2em;
+  margin: 0 auto;
+  margin-top: 2em;
+  padding: 1.5em;
+  background: #f1f1f1;
+}
+
+.form-header {
+  color: #E88024;
+  padding-top: .5em;
+}
+
+#formAddUser {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#formAddUser input, textarea  {
+  height: 45px;
+  width: 100%;
+  padding: .75em;
+  border: 2px solid rgba(0, 0, 0, 0.35);
+  border-radius: 3px;
+  margin: .7em 0;
+}
+
+textarea {
+  height: 180px;
+}
+
+button#btnSubmit {
+  height: 35px;
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 1em;
+  border: 3px solid rgba(0, 0, 0, 0.35);
+  border-radius: 3px;
+  color: ivory;
+  background: #00CCFF;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 992px) {
+  .col-xs-12 {
+    display: inline-block;
+    width: 30%;
+  }
 }

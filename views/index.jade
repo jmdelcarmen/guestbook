@@ -2,29 +2,24 @@ extends layout
 
 block content
 
-
     h1.text-xs-center #{title}
 
-    p
-      form#formAddUser(name="adduser", method="post", action="/")
-          input#inputUserName(type="text", placeholder="Username", name="username")
-          input#inputUserEmail(type="text", placeholder="Email", name="useremail")
-          input#inputUserMessage(type="text", placeholder="Message", name="usermessage")
-          button#btnSubmit(type="submit") Add Guest
 
-    table.table
-      thead
-        td Name:
-        td Email:
-        td Message:
-        td
-      tbody
-        each user, i in userlist
-          tr
-            td
-              a(href="#{user.username}")= user.username
-            td= user.email
-            td= user.message
-            td
-              a(href="#{user._id}/delete/")
-                .btn.btn-danger Remove
+
+    .row.guestlist-container.text-xs.center
+      each guest, i in guestlist
+        .col-xs-12.col-md-6.col-lg-4
+          p.guest-date= guest.date
+          div.guest-info
+            a(href="#{guest.username}")
+              h3.guest-name= guest.username
+          p.guest-message= guest.message
+          a(href="#{guest._id}/delete/")
+            i.fa.fa-trash
+     div.form-wrapper
+      h3.form-header Add Guest
+      form#formAddUser(name="adduser", method="post", action="/")
+          input#inputUserName(type="text", placeholder="Name", name="username")
+          input#inputUserEmail(type="text", placeholder="Email", name="useremail")
+          textarea#inputUserMessage(type="text", placeholder="Message", name="usermessage")
+          button#btnSubmit(type="submit") Add Guest

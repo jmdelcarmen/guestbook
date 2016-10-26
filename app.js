@@ -70,5 +70,5 @@ app.use(function(err, req, res, next) {
   });
 });
 
-
+console.log('Awesomeness is happening at port 3000...');
 module.exports = app;

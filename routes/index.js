@@ -8,7 +8,7 @@ router.get('/', function (req, res) {
   var collection = db.get('guests');
   collection.find({}, {}, function (e, docs) {
     res.render('index', {
-      userlist: docs,
+      guestlist: docs,
       "title": "Guestbook"
     });
   });
@@ -56,7 +56,8 @@ router.post('/', (req, res) => {
     collection.insert({
       "username": userName,
       "email": userEmail,
-      "message": userMessage
+      "message": userMessage,
+      "date": new Date().toDateString()
     }, (err, doc) => {
         if (err) {
           //If it failed, return error
