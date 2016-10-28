@@ -24,8 +24,8 @@ h1, h3, .form-toggler, form {
 }
 
 .primary-content {
-  position: absolute;
-  width: 80%;
+  /*position: absolute;
+  width: 80%;*/
   top: 10%;
   transition: .7s;
 }
