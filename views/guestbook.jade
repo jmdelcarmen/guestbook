@@ -17,6 +17,8 @@ block content
             p.guest-message= guest.message
             a(href="/guestbook/#{guest._id}/delete/")
               i.fa.fa-trash
+            img(src="#{guest.avatar}")
+
 
     .row
      div.form-wrapper

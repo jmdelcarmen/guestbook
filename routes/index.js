@@ -2,6 +2,7 @@
 var express = require('express');
 var ObjectID = require('mongodb').ObjectID;
 var passport = require('passport');
+var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
 var router = express.Router();
 
 
@@ -14,16 +15,11 @@ var env = {
 ///////////////////////////////////////////////////////////
 ////////////////////////HOME PAGE//////////////////////////
 ///////////////////////////////////////////////////////////
-
 router.route('/').get((req, res) => {
   res.render('index');
 }).post((req, res) => {
 
 });
-
-
-
-
 
 
 
@@ -63,22 +59,22 @@ router.route('/guestbook')
     });
   })
   //Add guest to guestlist
-  .post((req, res) => {
+  .post(ensureLoggedIn, (req, res) => {
     //Set out internal DB variable
     var db = req.db;
     //Get our form values. These rely on the "name" attributes
-    var userName = req.body.username;
     var userEmail = req.body.useremail;
     var userMessage = req.body.usermessage;
     //Set our collection
     var collection = db.get('guests');
 
     //Submit to the db
-    if (userName !== "" && userEmail !== "" && userMessage !== "") {
+    if (userEmail !== "" && userMessage !== "") {
       collection.insert({
-        "username": userName,
+        "username": req.user.nickname,
         "email": userEmail,
         "message": userMessage,
+        "avatar": req.user.picture,
         "date": new Date().toDateString()
       }, (err, doc) => {
           if (err) {
@@ -105,7 +101,8 @@ router.get('/guestbook/:username', function (req, res){
     res.render('search', {
       name: doc[0].username,
       email: doc[0].email,
-      message: doc[0].message
+      message: doc[0].message,
+      avatar: doc[0].avatar
     });
   });
 });
