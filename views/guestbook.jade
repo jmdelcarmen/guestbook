@@ -5,7 +5,7 @@ block content
     h1.text-xs-center #{title}
     .row.primary-content
       div.text-xs-right
-        button.form-toggler Add guest
+        button.form-toggler Add note
           i.fa.fa-plus
       .row.guestlist-container.text-xs.center
         each guest, i in guestlist
@@ -24,7 +24,6 @@ block content
      div.form-wrapper
       h3.form-header Add Guest
       form#formAddUser(name="adduser", method="post", action="/guestbook")
-          input#inputUserName(type="text", placeholder="Name", name="username")
           input#inputUserEmail(type="email", placeholder="Email", name="useremail")
           textarea#inputUserMessage(type="text", placeholder="Message", name="usermessage")
-          button#btnSubmit(type="submit") Add Guest
+          button#btnSubmit(type="submit") Submit

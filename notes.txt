@@ -1,2 +1,0 @@
-1. index.jade function variables
-2. link.jade variables

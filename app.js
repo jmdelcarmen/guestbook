@@ -18,6 +18,7 @@ dotenv.load();
 
 var routes = require('./routes/index');
 var user = require('./routes/user');
+var guestbook = require('./routes/guestbook');
 
 // This will configure Passport to use Auth0
 var strategy = new Auth0Strategy({
@@ -50,8 +51,6 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/guestbook');
 
-
-
 var app = express();
 
 
@@ -82,8 +81,11 @@ app.use(function (req, res, next) {
   next();
 });
 
+//////////////////////////////////////////
+///////////////////////////////////ROUTES
 app.use('/', routes);
 app.use('/user', user);
+app.use('/guestbook', guestbook);
 
 
 // catch 404 and forward to error handler
@@ -116,7 +118,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 
 console.log('Awesomeness is happening at port 3000...');
