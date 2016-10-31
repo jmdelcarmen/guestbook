@@ -11,6 +11,13 @@ var env = {
   AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
   AUTH0_CALLBACK_URL: process.env.AUTH0_CALLBACK_URL || 'http://localhost:3000/callback'
 };
+
+
+router.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/index');
+});
+
 ///////////////////////////////////////////////////////////
 //////////////////////GUESTBOOK////////////////////////////
 ///////////////////////////////////////////////////////////

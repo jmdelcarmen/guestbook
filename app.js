@@ -84,7 +84,7 @@ app.use(function (req, res, next) {
 //////////////////////////////////////////
 ///////////////////////////////////ROUTES
 app.use('/', routes);
-app.use('/user', user);
+// app.use('/user', user);
 app.use('/guestbook', guestbook);
 
 

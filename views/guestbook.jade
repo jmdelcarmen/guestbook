@@ -2,28 +2,32 @@ extends layout
 
 block content
 
-    h1.text-xs-center #{title}
+              
     .row.primary-content
-      div.text-xs-right
-        button.form-toggler Add note
-          i.fa.fa-plus
+      p.text-xs-right
+        a(href="/logout").logout Logout
+      h1.text-xs-center #{title}
+      div.logo
+        img(src="images/guestbook-icon.png")
+      p.text-xs-center
+        a(href="#").form-toggler Add note 
       .row.guestlist-container.text-xs.center
         each guest, i in guestlist
-          .col-xs-12.col-md-6.col-lg-4
+          .col-xs-12.col-md-5.col-lg-3
             p.guest-date= guest.date
-            div.guest-info
+            div.guest-info.text-xs-center
               a(href="/guestbook/#{guest.username}")
+                img.guest-img(src="#{guest.avatar}")
                 h3.guest-name= guest.username
             p.guest-message= guest.message
             a(href="/guestbook/#{guest._id}/delete/")
               i.fa.fa-trash
-            img(src="#{guest.avatar}")
-
-
+              
+    
     .row
      div.form-wrapper
-      h3.form-header Add Guest
+      h3.form-header Add note
       form#formAddUser(name="adduser", method="post", action="/guestbook")
           input#inputUserEmail(type="email", placeholder="Email", name="useremail")
           textarea#inputUserMessage(type="text", placeholder="Message", name="usermessage")
-          button#btnSubmit(type="submit") Submit
+          button#btnSubmit(type="submit") Submit 
