@@ -39,6 +39,7 @@ router.route('/')
     //Set out internal DB variable
     var db = req.db;
     //Get our form values. These rely on the "name" attributes
+    var userName = req.body.username;
     var userEmail = req.body.useremail;
     var userMessage = req.body.usermessage;
     //Set our collection
@@ -47,7 +48,7 @@ router.route('/')
     //Submit to the db
     if (userEmail !== "" && userMessage !== "") {
       collection.insert({
-        "username": req.user.nickname,
+        "username": userName,
         "email": userEmail,
         "message": userMessage,
         "avatar": req.user.picture,

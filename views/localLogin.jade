@@ -1,0 +1,11 @@
+extends layout
+
+block content
+
+    .row
+     div.form-wrapper
+      h3.form-header Login
+      form#formAddUser(name="login", method="post", action="/localLogin")
+          input#inputUserName(type="text", placeholder="Username", name="username")
+          input#inputPassword(type="password", placeholder="password", name="password")
+          button#btnSubmit(type="submit") Submit 
