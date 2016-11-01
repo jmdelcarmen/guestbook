@@ -1,5 +1,7 @@
 'use strict';
+
 var express = require('express');
+var bcrypt = require('bcrypt');
 var router = express.Router();
 
 
@@ -19,7 +21,10 @@ router.route('/')
     //crate user
     usercollection.find({"username": username}, (e, user) => {
         if (user.length === 0) {
-          usercollection.insert({"username": username, "password": password});
+          ///////////////encrypt the password///////////////
+          var hashedPwd = bcrypt.hashSync(password, 10);
+
+          usercollection.insert({"username": username, "password": hashedPwd});
           res.redirect('/localLogin');
         } else {
           res.redirect('/');

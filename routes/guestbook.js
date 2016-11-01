@@ -23,7 +23,7 @@ router.get('/logout', function(req, res){
 ///////////////////////////////////////////////////////////
 router.route('/')
   //Guestlist
-  .get(ensureLoggedIn, (req, res) => {
+  .get((req, res) => {
     var db = req.db;
     var collection = db.get('guests');
     collection.find({}, {}, function (e, records) {
@@ -35,7 +35,7 @@ router.route('/')
     });
   })
   //Add guest to guestlist
-  .post(ensureLoggedIn, (req, res) => {
+  .post((req, res) => {
     //Set out internal DB variable
     var db = req.db;
     //Get our form values. These rely on the "name" attributes

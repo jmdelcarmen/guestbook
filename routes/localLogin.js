@@ -1,7 +1,6 @@
 'use strict';
 var express = require('express');
-var passport = require('passport');
-var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
+var bcrypt = require('bcrypt');
 var router = express.Router();
 
 
@@ -16,15 +15,20 @@ router.route('/')
     var username = req.body.username;
     var password = req.body.password;
 
-    usercollection.findOne({"username": username}, (e, user) => {
-      if (user.username === username) {
-        passport.authenticate('auth0', { failureRedirect: '/url-if-something-fails' });
-        res.redirect('/guestbook');
-      } else {
-        res.redirect('/');
-      }
+    usercollection.find({"username": username}, (e, user) => {
+      bcrypt.compare(password, user[0].password, (err, response) => {
+        if (response) {
+          console.log('I work');
+          res.redirect('/guestbook');
+        } else {
+          console.log('I don\'t work. ');
+          res.redirect('/');
+        }
+    });
+
+
+    });
   });
-});
 
 
 module.exports = router;
