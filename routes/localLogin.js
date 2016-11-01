@@ -15,19 +15,32 @@ router.route('/')
     var username = req.body.username;
     var password = req.body.password;
 
+    
     usercollection.find({"username": username}, (e, user) => {
-      bcrypt.compare(password, user[0].password, (err, response) => {
-        if (response) {
-          console.log('I work');
-          res.redirect('/guestbook');
-        } else {
-          console.log('I don\'t work. ');
-          res.redirect('/');
-        }
+      if (user.length > 0) {
+        bcrypt.compare(password, user[0].password, (err, isValid) => {
+          if (isValid) {
+            console.log('Valid user');
+            res.redirect('/guestbook');
+          } else {
+            console.log('Invalid user');
+            res.redirect('/');
+          }
+        });
+      } else {
+        res.redirect('/');
+      }
     });
 
 
-    });
+
+
+
+
+
+
+
+
   });
 
 

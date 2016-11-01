@@ -1,19 +1,17 @@
 'use strict';
-var express = require('express');
-var helmet = require('helmet');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 /////////////////////////////
 //////////AuthO//////////////
 /////////////////////////////
-var session = require('express-session');
-var dotenv = require('dotenv');
-var passport = require('passport');
-var Auth0Strategy = require('passport-auth0');
-
+const session = require('express-session');
+const dotenv = require('dotenv');
+const passport = require('passport');
+const Auth0Strategy = require('passport-auth0');
 dotenv.load();
 
 //////////////////////////////////
@@ -25,12 +23,12 @@ var signup = require('./routes/signup');
 var localLogin = require('./routes/localLogin');
 
 // This will configure Passport to use Auth0
-var strategy = new Auth0Strategy({
+const strategy = new Auth0Strategy({
     domain:       process.env.AUTH0_DOMAIN,
     clientID:     process.env.AUTH0_CLIENT_ID,
     clientSecret: process.env.AUTH0_CLIENT_SECRET,
     callbackURL:  process.env.AUTH0_CALLBACK_URL || 'http://localhost:3000/callback'
-  }, function(accessToken, refreshToken, extraParams, profile, done) {
+  }, (accessToken, refreshToken, extraParams, profile, done) => {
     // accessToken is the token to call Auth0 API (not needed in the most cases)
     // extraParams.id_token has the JSON Web Token
     // profile has all the information from the user
@@ -40,22 +38,22 @@ var strategy = new Auth0Strategy({
 passport.use(strategy);
 
 // you can use this section to keep a smaller payload
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done) => {
   done(null, user);
 });
 
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
 //////////////////////////////
 /////////Mongo DB/////////////
 //////////////////////////////
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/guestbook');
+const mongo = require('mongodb');
+const monk = require('monk');
+const db = monk('localhost:27017/guestbook');
 
-var app = express();
+const app = express();
 
 
 // view engine setup
@@ -76,7 +74,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(helmet());
+
 
 
 ///////Make our db accesible to our router
