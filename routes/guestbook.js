@@ -26,9 +26,9 @@ router.route('/')
   .get(ensureLoggedIn, (req, res) => {
     var db = req.db;
     var collection = db.get('guests');
-    collection.find({}, {}, function (e, docs) {
+    collection.find({}, {}, function (e, records) {
       res.render('guestbook', {
-        guestlist: docs,
+        guestlist: records,
         "title": "Guestbook",
         env: env
       });
@@ -73,12 +73,12 @@ router.get('/:username', function (req, res){
   var username = req.params.username;
   var db = req.db;
   var collection = db.get('guests');
-  collection.find({"username": username}, (e, doc) => {
-    res.render('search', {
-      name: doc[0].username,
-      email: doc[0].email,
-      message: doc[0].message,
-      avatar: doc[0].avatar
+  collection.findOne({"username": username}, (e, guest) => {
+    res.render('guest', {
+      name: guest.username,
+      email: guest.email,
+      message: guest.message,
+      avatar: guest.avatar
     });
   });
 });
