@@ -23,7 +23,7 @@ router.get('/logout', function(req, res){
 ///////////////////////////////////////////////////////////
 router.route('/')
   //Guestlist
-  .get((req, res) => {
+  .get(ensureLoggedIn, (req, res) => {
     var db = req.db;
     var collection = db.get('guests');
     collection.find({}, {}, function (e, records) {
@@ -35,23 +35,24 @@ router.route('/')
     });
   })
   //Add guest to guestlist
-  .post((req, res) => {
+  .post(ensureLoggedIn, (req, res) => {
     //Set out internal DB variable
     var db = req.db;
     //Get our form values. These rely on the "name" attributes
-    var userName = req.body.username;
+    var user = req.user;
     var userEmail = req.body.useremail;
     var userMessage = req.body.usermessage;
+
     //Set our collection
     var collection = db.get('guests');
 
     //Submit to the db
     if (userEmail !== "" && userMessage !== "") {
       collection.insert({
-        "username": userName,
+        "username": user.nickname,
         "email": userEmail,
         "message": userMessage,
-        "avatar": req.user.picture,
+        "avatar": user.picture,
         "date": new Date().toDateString()
       }, (err, doc) => {
           if (err) {

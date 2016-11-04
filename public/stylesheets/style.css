@@ -166,8 +166,10 @@ img[src*="guestbook"] {
   margin-top: 2em;
   padding: 1.5em;
   background: #f1f1f1;
-  position: relative;
-  top: 5%;
+  position: absolute;
+  top: 10%;
+  left: 30%; right: 30%;
+  opacity: 0;
 }
 
 .form-header {

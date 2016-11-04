@@ -22,13 +22,10 @@ block content
             p.guest-message= guest.message
             a(href="/guestbook/#{guest._id}/delete/")
               i.fa.fa-trash
-              
-    
-    .row
+                     
      div.form-wrapper
       h3.form-header Add note
       form#formAddUser(name="adduser", method="post", action="/guestbook")
-          input#inputUserName(type="test", placeholder="Username", name="username")
           input#inputUserEmail(type="email", placeholder="Email", name="useremail" required)
           textarea#inputUserMessage(type="text", placeholder="Message", name="usermessage")
           button#btnSubmit(type="submit") Submit 
