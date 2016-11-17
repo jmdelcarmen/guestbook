@@ -1,18 +1,20 @@
 'use strict';
-var express = require('express');
-var ObjectID = require('mongodb').ObjectID;
-var passport = require('passport');
-var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
-var router = express.Router();
+const express = require('express');
+const ObjectID = require('mongodb').ObjectID;
+const passport = require('passport');
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
+const router = express.Router();
+const mongoose = require('mongoose');
+const Guest = require('../models/guest');
 
 
-var env = {
+const env = {
   AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
   AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
   AUTH0_CALLBACK_URL: process.env.AUTH0_CALLBACK_URL || 'http://localhost:3000/callback'
 };
 
-router.get('/logout', function(req, res){
+router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });
@@ -23,58 +25,46 @@ router.get('/logout', function(req, res){
 router.route('/')
   //Guestlist
   .get(ensureLoggedIn, (req, res) => {
-    var db = req.db;
-    var collection = db.get('guests');
-    collection.find({}, {}, function (e, records) {
+    Guest.find({}, (e, guests) => {
       res.render('guestbook', {
-        guestlist: records,
-        "title": "Guestbook",
+        guestlist: guests,
+        title: "Guestbook",
         env: env
       });
     });
   })
   //Add guest to guestlist
-  .post(ensureLoggedIn, (req, res) => {
-    //Set out internal DB variable
-    var db = req.db;
-    //Get our form values. These rely on the "name" attributes
-    var user = req.user;
-    var userEmail = req.body.useremail;
-    var userMessage = req.body.usermessage;
-
-    //Set our collection
-    var collection = db.get('guests');
+  .post(ensureLoggedIn, (req, res, next) => {
+    let user = req.user;
+    let userEmail = req.body.useremail;
+    let userMessage = req.body.usermessage;
 
     //Submit to the db
     if (userEmail !== "" && userMessage !== "") {
-      collection.insert({
+      var newGuest = new Guest({
         "username": user.nickname,
         "email": userEmail,
         "message": userMessage,
         "avatar": user.picture,
         "date": new Date().toDateString()
-      }, (err, doc) => {
-          if (err) {
-            //If it failed, return error
-            res.send('There was a problem adding the information to the database.');
-          }
-          else {
-            //And forward to success page
-            res.redirect('/guestbook');
-          }
+      });
+
+      newGuest.save((e, data) => {
+        if(e) throw e;
+        console.log('New message added');
       });
     }
     else {
       res.redirect('/guestbook');
     }
+    res.redirect('/guestbook');
 });
+
 /////////////////////////////////////////////////
 ////////////Direct to page with guest information
-router.get('/:username', function (req, res){
-  var username = req.params.username;
-  var db = req.db;
-  var collection = db.get('guests');
-  collection.findOne({"username": username}, (e, guest) => {
+router.get('/:username', (req, res) => {
+  let username = req.params.username;
+  Guest.findOne({"username": username}, (e, guest) => {
     res.render('guest', {
       name: guest.username,
       email: guest.email,
@@ -85,12 +75,14 @@ router.get('/:username', function (req, res){
 });
 //////////////////////////////////////////////
 ///////////////////Remove guest from guestbook
-router.get('/:id/delete/', function (req, res) {
-  var id = req.params.id;
-  var objectId = new ObjectID(id);
-  var db = req.db;
-  var collection = db.get('guests');
-  collection.remove({"_id": objectId});
+router.get('/:id/delete/', (req, res) => {
+  let id = req.params.id;
+  Guest.findByIdAndRemove(id, (e, data) => {
+    if(e){
+      throw e;
+    }
+    console.log('Message successfully deleted.');
+  });
   res.redirect('/guestbook');
 });
 

@@ -1,7 +1,6 @@
 'use strict';
 const express = require('express');
 const path = require('path');
-const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -9,16 +8,10 @@ const bodyParser = require('body-parser');
 //////////AuthO//////////////
 /////////////////////////////
 const session = require('express-session');
-const dotenv = require('dotenv');
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
-dotenv.load();
 
-//////////////////////////////////
-//////////ROUTES//////////////////
-//////////////////////////////////
-const routes = require('./routes/index');
-const guestbook = require('./routes/guestbook');
+require('dotenv').config();
 
 // This will configure Passport to use Auth0
 const strategy = new Auth0Strategy({
@@ -47,9 +40,12 @@ passport.deserializeUser((user, done) => {
 //////////////////////////////
 /////////Mongo DB/////////////
 //////////////////////////////
-const mongo = require('mongodb');
-const monk = require('monk');
-const db = monk('localhost:27017/guestbook');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/guestbook');
+
+///////////////////MODEL/////////////////
+const Guest = require('./models/guest');
+
 
 const app = express();
 
@@ -74,19 +70,14 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-
-///////Make our db accesible to our router
-app.use(function (req, res, next) {
-  req.db = db;
-  next();
-});
-
 //////////////////////////////////////////
-///////////////////////////////////ROUTES
-app.use('/', routes);
-app.use('/guestbook', guestbook);
-// app.use('/signup', signup);
-// app.use('/localLogin', localLogin);
+//////////////////APIS///////////////////
+app.use('/', require('./routes/index'));
+app.use('/guestbook', require('./routes/guestbook'));
+
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
