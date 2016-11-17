@@ -17,7 +17,8 @@ router.route('/')
       res.render('guestbook', {
         guestlist: guests,
         title: "Guestbook",
-        env: env
+        env: env,
+        user: req.user
       });
     });
   })
@@ -46,9 +47,8 @@ router.route('/')
 });
 
 /////////////Redirect to page with guest information/////////
-router.get('/:username', ensureAuthenticated, (req, res) => {
-  let username = req.params.username;
-  Guest.findOne({"username": username}, (e, guest) => {
+router.get('/:id', ensureAuthenticated, (req, res) => {
+  Guest.findById(req.params.id, (e, guest) => {
     res.render('guest', {
       name: guest.username,
       email: guest.email,
