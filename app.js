@@ -4,21 +4,29 @@ const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-/////////////////////////////
-//////////AuthO//////////////
-/////////////////////////////
+/////////////////AuthO////////////////////
 const session = require('express-session');
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
+////////////Multer file uploader//////////////
+const multer = require('multer');
+const upload = multer({dest: 'public/uploads'});
 
 require('dotenv').config();
+
+module.exports.env = {
+  AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
+  AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
+  AUTH0_CALLBACK_URL: process.env.AUTH0_CALLBACK_URL
+};
+
 
 // This will configure Passport to use Auth0
 const strategy = new Auth0Strategy({
     domain:       process.env.AUTH0_DOMAIN,
     clientID:     process.env.AUTH0_CLIENT_ID,
     clientSecret: process.env.AUTH0_CLIENT_SECRET,
-    callbackURL:  process.env.AUTH0_CALLBACK_URL || 'http://localhost:3000/callback'
+    callbackURL:  process.env.AUTH0_CALLBACK_URL
   }, (accessToken, refreshToken, extraParams, profile, done) => {
     // accessToken is the token to call Auth0 API (not needed in the most cases)
     // extraParams.id_token has the JSON Web Token
@@ -27,35 +35,24 @@ const strategy = new Auth0Strategy({
   });
 
 passport.use(strategy);
-
-// you can use this section to keep a smaller payload
 passport.serializeUser((user, done) => {
   done(null, user);
 });
-
 passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
-//////////////////////////////
-/////////Mongo DB/////////////
-//////////////////////////////
+////////////////Mongo DB///////////////////
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/guestbook');
-
-///////////////////MODEL/////////////////
-const Guest = require('./models/guest');
-
-
 const app = express();
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+/////////////////FILE UPLOAD///////////////////////
+app.use(multer({dest: 'public/uploads'}).single('profileImage'));
+/////////////////MIDDLEWARE///////////////////////
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -69,13 +66,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-//////////////////////////////////////////
-//////////////////APIS///////////////////
+/////////////////////APIS//////////////////////
 app.use('/', require('./routes/index'));
 app.use('/guestbook', require('./routes/guestbook'));
 
-
+app.get('*', (req, res, next) => {
+  module.locals.user = req.user || null;
+});
 
 
 
@@ -111,5 +108,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-console.log('Awesomeness is happening at port 3000...');
+
 module.exports = app;
+console.log('Awesomeness is happening at port 3000...');

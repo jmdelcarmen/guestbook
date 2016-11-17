@@ -4,9 +4,12 @@ block content
       
       div.landing-page
         nav
-          a(href="/login") Login / Sign up 
-        span.landing-header The Guestbook
-
+          a(href="/auth0_login") Auth0 
+          a(href="/local_login") Login
+          a(href="/regist") Register
+        //- span.landing-header The Guestbook
+        include local_login
+      //- include partials/login-register
           
 
 

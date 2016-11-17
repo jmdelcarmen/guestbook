@@ -1,0 +1,261 @@
+body {
+  background: url('../images/guestbook-bg.jpg') no-repeat;
+  background-size: cover;
+}
+
+.container {
+  width: 90% !important;
+}
+
+a, a:hover, a:focus {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+h1 {
+  color: white;
+  text-transform: uppercase;
+  font-size: 2.5em;
+  margin-bottom: 1.5em;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+/*h1, h3, .form-toggler, form {
+  font-family: 'Gotham', sans-serif;
+}*/
+
+.logout, .form-toggler, .landing-page nav a {
+  color: white;
+  font-size: 1em;
+  font-weight: 500;
+  padding: 10px 20px;
+  border: 2px solid white;
+  transition: .3s;
+}
+
+
+.logout:hover, .form-toggler:hover {
+  background: white;
+  color: #444;
+  box-shadow: 0 0 6px black;
+}
+
+.logo {
+  padding-top: 50px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 1em 0;
+  margin-bottom: 1em;
+}
+
+img[src*="guestbook"] {
+  max-width: 150px;
+  max-height: 150px;
+  display: inline-block;
+}
+
+.primary-content {
+  padding: 2em;
+  margin-top: 2em;
+  /*border: 2px solid rgba(255,255,255,0.3);*/
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.guestlist-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.col-xs-12 {
+  background: #247291;
+  color: white;
+  flex-grow: 1;
+  padding: .5em;
+  border-radius: 3px;
+  border: 3.5px solid rgba(255, 255, 255, 0.6);
+  margin: 1% .5%;
+}
+
+.guest-info {
+  position: relative;
+}
+
+.guest-date {
+  color: #444;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: .75em;
+  padding: 5px 8px;
+  background: #F8DA5B;
+  border-radius: 2px;
+  border: 2px solid #444;
+}
+
+.guest-img {
+  width: 80px;
+  height: 80px;
+  display: inline-block;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, .6);
+  margin: 0 auto;
+  padding: 0;
+  transition: .3s;
+}
+
+.guest-img:hover {
+  transform: scale(1.2);
+}
+
+.guest-name {
+  text-align: center;
+  font-size: .95em;
+  margin-left: 1em;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  color: ivory;
+  transition: .4s;
+}
+
+.guest-name:hover {
+  color: rgba(255, 255, 255, .3);
+}
+
+.guest-message {
+  font-size: 13px;
+  margin: 0 auto;
+  width: 95%;
+  min-height: 100px;
+  margin-bottom: 3em;
+  background: rgba(0, 0, 0, 0.3);
+  padding: .7em;
+}
+
+.fa-trash {
+  position: absolute;
+  bottom: -3px;
+  right: 0px;
+  font-size: 1.25em;
+  padding: 10px;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.fa-trash:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+
+
+
+/*************************FORM**************************/
+
+/*.form-wrapper{
+  width: 95%;
+  max-width: 400px;
+  margin-top: 2em;
+  margin: 0 auto;
+  margin-top: 2em;
+  padding: 1.5em;
+  background: #f1f1f1;
+  position: relative;
+}
+
+.form-header {
+  color: #E88024;
+  padding-top: .5em;
+}
+
+#formAddUser {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#formAddUser input, textarea  {
+  height: 45px;
+  width: 100%;
+  padding: .75em;
+  border: 2px solid rgba(0, 0, 0, 0.35);
+  border-radius: 3px;
+  margin: .7em 0;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+textarea {
+  height: 180px;
+}
+
+button#btnSubmit {
+  height: 35px;
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 1em;
+  border: 3px solid rgba(0, 0, 0, 0.35);
+  border-radius: 3px;
+  color: ivory;
+  background: #00CCFF;
+}
+
+.fa-close {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  padding: 5px 10px 5px 20px;
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 2em;
+  background: #f1f1f1;
+  border-radius: 3px;
+  transition: all .4s;
+}
+
+.fa-close:hover {
+  color: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}*/
+
+
+/***********INDEX.jade****************/
+.landing-page {
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+.landing-header {
+  text-align: center;
+  position: absolute;
+  top: 40%;
+  right: 25%; left: 25%;
+  padding: 30px 20px;
+  width: 50%;
+  border: 2px solid #f1f1f1;
+  font-size: 2.3em;
+  font-weight: 300;
+  color: white;
+  background: rgba(0, 0, 0, 0.2);
+}
+.landing-page nav {
+  padding: 2em 2em 0 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  flex-flow: row wrap;
+}
+
+.landing-page nav a {
+  margin-right: 1em;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/**/
