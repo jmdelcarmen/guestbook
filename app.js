@@ -44,7 +44,7 @@ passport.deserializeUser((user, done) => {
 
 ////////////////Mongo DB///////////////////
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/guestbook');
+mongoose.connect(process.env.DB_URI);
 const app = express();
 
 // view engine setup
