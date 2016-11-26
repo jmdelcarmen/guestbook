@@ -12,16 +12,16 @@ const upload = multer({dest: 'public/uploads'});
 
 ////////////////////////HOME PAGE//////////////////////////
 router.route('/').get((req, res) => {
-  res.render('index');
+  res.render('index', {user: req.user});
 }).post((req, res) => {
 //Home page post///
 });
 
 /////////////////////////Local_Register/////////////////////////////
 
-router.route("/local_register")
+router.route("/local_signup")
   .get((req, res) => {
-//do something for the register form
+    res.render('localauth/local_signup');
   })
   .post((req, res) => {
     console.log(req.body);
@@ -46,7 +46,7 @@ router.route("/local_register")
 
 router.route('/local_login')
   .get((req, res) => {
-    // res.render('login', {title: 'Login'})
+    res.render('localauth/local_login');
   })
   .post(passport.authenticate('local', {failureRedirect: '/'}), (req, res) => {
     // req.flash('success', 'You are now logged in');
@@ -79,15 +79,12 @@ router.route('/local_login')
   ));
 
 
-
 /////////////////////////Auth0-Login&Register/////////////////////
 router.get('/auth0_login', (req, res) => {
     res.render('auth0', { env: env });
   });
 
-router.get('/callback',
-  passport.authenticate('auth0', { failureRedirect: '/' }),
-  (req, res) => {
+router.get('/callback', passport.authenticate('auth0', { failureRedirect: '/' }), (req, res) => {
     res.redirect(req.session.returnTo || '/guestbook');
   });
 

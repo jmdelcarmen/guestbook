@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  // Local Login
+  div.bg-wrapper
+    form(method="post" action="local_login").col-xs-4.pb-2.login
+      h3.lead Login
+      .form-group
+        label Username:
+        input(type="text" name="username" required autofocus)
+      .form-group
+        label Password:
+        input(type="password" name="password" required)
+      button(type="submit") Login

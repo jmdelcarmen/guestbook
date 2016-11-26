@@ -1,6 +1,5 @@
 body {
-  background: url('../images/guestbook-bg.jpg') no-repeat;
-  background-size: cover;
+  background: #05232E;
 }
 
 .container {
@@ -20,13 +19,32 @@ h1 {
   margin-bottom: 1.5em;
 }
 
+/****************NAVBAR STYLES********************/
+.navbar a {
+  color: #444;
+}
+
+.navbar img {
+  margin-left: 10%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid #444;
+}
+
+
+
+
+
+
+
+
+
+
+
 button:hover {
   cursor: pointer;
 }
-
-/*h1, h3, .form-toggler, form {
-  font-family: 'Gotham', sans-serif;
-}*/
 
 .logout, .form-toggler, .landing-page nav a {
   color: white;
@@ -61,8 +79,9 @@ img[src*="guestbook"] {
 .primary-content {
   padding: 2em;
   margin-top: 2em;
-  /*border: 2px solid rgba(255,255,255,0.3);*/
-  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  border: 15px solid rgba(0,0,0,0.5);
+  background: #ea655b;
 }
 
 .guestlist-container {
@@ -154,9 +173,7 @@ img[src*="guestbook"] {
 }
 
 
-
-
-/*************************FORM**************************/
+/*************************USER MESSAGE FORM**************************/
 
 .form-wrapper{
   width: 95%;
@@ -222,40 +239,71 @@ button#btnSubmit {
 }
 
 
-/***********INDEX.jade****************/
-.landing-page {
-  position: absolute;
-  width: 100%;
-  min-height: 100vh;
+/*************************USER LOGIN & REGISTER FORM**************************/
+
+.bg-wrapper {
+  position: relative;
   top: 0;
-  left: 0;
+  right: 0;
 }
 
-.landing-header {
-  text-align: center;
+.login, .signup {
   position: absolute;
-  top: 40%;
-  right: 25%; left: 25%;
-  padding: 30px 20px;
-  width: 50%;
-  border: 2px solid #f1f1f1;
-  font-size: 2.3em;
-  font-weight: 300;
-  color: white;
-  background: rgba(0, 0, 0, 0.2);
-}
-.landing-page nav {
-  padding: 2em 2em 0 0;
-  width: 100%;
+  top: 80px;
+  right: 33%;
+  left: 33%;
+  background: #4cabb2;
+  color: #fff;
+  padding: 0;
+  border: 2px solid #444;
   display: flex;
-  justify-content: flex-end;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
+  padding-bottom: 2em;
 }
 
-.landing-page nav a {
-  margin-right: 1em;
-  color: white;
-  background: rgba(0, 0, 0, 0.5);
+.login h3, .signup h3 {
+  background: #444;
+  text-align: center;
+  padding: 1em;
+  border-bottom: 5px solid #f1f1f1;
+  font-weight: bold;
+  color: #f1f1f1;
 }
 
-/**/
+.form-group {
+  margin: 0;
+  background: #444;
+  color: #f1f1f1;
+  padding: .75em .5em .5em;
+}
+
+.login input, .signup input {
+  margin-left: 1em;
+  width: 70%;
+  background: none;
+  padding: .2em .5em;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  color: #eee;
+}
+
+.register input[type="file"] {
+  padding-top: 1em;
+  border: none;
+  margin: 0 auto;
+}
+
+.login button, .signup button {
+  display: inline-block;
+  width: 80%;
+  margin: 0 auto;
+  background: #1ABC9C;
+  margin-top: 10%;
+  color: #fff;
+  border: 2px solid white;
+}
+
+.login button:active, .signup button:active {
+  background: #109177;
+}

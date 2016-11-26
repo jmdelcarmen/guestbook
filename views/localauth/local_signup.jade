@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+  // Local Register
+  div.bg-wrapper
+    form(method="post" action="local_signup" enctype="multipart/form-data").col-xs-4.signup
+      h3.lead Sign Up
+      .form-group
+        label Username:
+        input(type="text" name="username" required autofocus)
+      .form-group
+        label Password:
+        input(type="password" name="password" required)
+      .form-group
+        label Email:
+        input(type="email" name="email" required)
+      .form-group
+        label Profile Image
+        input(type="file" name="profileImage" class="form-control")
+      button(type="submit") Register

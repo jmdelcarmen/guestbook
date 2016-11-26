@@ -5,16 +5,30 @@ html
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous")
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css")
     link(href="//db.onlinewebfonts.com/c/bd317adf74e5e7e564eb61ce9926cc6d?family=Gotham" rel="stylesheet" type="text/css")
-    //- link(href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600', rel='stylesheet', type='text/css')
-    //- link(rel='stylesheet', href='/stylesheets/normalize.css')
+    link(rel='stylesheet', href='/stylesheets/normalize.css')
     link(rel='stylesheet', href='/stylesheets/main.css')
-    //- link(rel='stylesheet', href='/stylesheets/style.css')
-
-    
     script(src="https://cdn.auth0.com/js/lock/10.3/lock.min.js")
-    //- script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js')
-    //- script(src='javascripts/index.js')
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+    script(src='javascripts/index.js')
+    
+    
+    nav.navbar.navbar-light.bg-faded
+      .container.text-xs-right
+        //- p #{user.profileImage}
+        .col-lg-8
+          a.navbar-brand(href='/') Guestbook
+            if !user
+              ul.nav.navbar-nav
+                li.nav-item
+                  a.nav-link(href='/local_login') Login
+                li.nav-item
+                  a.nav-link(href='/local_signup') Sign Up 
+                li.nav-item
+                  a.nav-link(href='/auth0_login') Auth0         
+        .col-xs-4     
+          if user
+            a(href="guestbook/logout") Logout
+            img(src="#{user.picture}")
 
-
-    body.container
-    block content
+    div.container
+      block content
