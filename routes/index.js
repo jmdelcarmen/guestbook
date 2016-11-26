@@ -26,11 +26,13 @@ router.route("/local_signup")
   .post((req, res) => {
     console.log(req.body);
     console.log(req.file);
+    let picture = '';
+    req.file ? picture = `/uploads/${req.file.filename}` : picture = 'https://s-media-cache-ak0.pinimg.com/originals/7d/da/38/7dda385ed3724fea700d45a0349d9e77.png'
     let newUser = new User({
       username: req.body.username,
       password: bcrypt.hashSync(req.body.password, 10),
       email: req.body.email,
-      picture: `/uploads/${req.file.filename}`,
+      picture: picture,
       date_created: new Date().toDateString()
     });
     newUser.save((e, data) => {
@@ -48,7 +50,7 @@ router.route('/local_login')
   .get((req, res) => {
     res.render('localauth/local_login');
   })
-  .post(passport.authenticate('local', {failureRedirect: '/'}), (req, res) => {
+  .post(passport.authenticate('local', {failureRedirect: '/local_login'}), (req, res) => {
     // req.flash('success', 'You are now logged in');
     res.redirect('/guestbook');
   });

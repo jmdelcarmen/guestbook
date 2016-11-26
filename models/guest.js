@@ -5,7 +5,6 @@ const guestModel = function () {
 
   let guestSchema = mongoose.Schema({
     username: String,
-    email: String,
     message: String,
     avatar: String,
     date: String

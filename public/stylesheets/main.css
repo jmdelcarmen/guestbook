@@ -24,10 +24,21 @@ h1 {
   color: #444;
 }
 
+.navbar-brand {
+  display: inline-block;
+  border: 2px solid #444;
+  padding: .25em;
+  color: #fff !important;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #EA655B 50%, #75332E 50%);
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  letter-spacing: 2px;
+}
+
 .navbar img {
   margin-left: 10%;
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   border: 3px solid #444;
 }
@@ -41,6 +52,13 @@ h1 {
 
 
 
+
+
+
+
+
+
+/**********************************/
 
 button:hover {
   cursor: pointer;

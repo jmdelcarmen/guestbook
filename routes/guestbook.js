@@ -14,7 +14,8 @@ router.route('/')
   //Guestlist
   .get(ensureAuthenticated, (req, res) => {
     Guest.find({}, (e, guests) => {
-      res.render('guestbook', {
+      if (e) throw e;
+       res.render('guestbook', {
         guestlist: guests,
         title: "Guestbook",
         env: env,
@@ -25,12 +26,10 @@ router.route('/')
   //Add guest to guestlist
   .post(ensureAuthenticated, (req, res, next) => {
     let user = req.user;
-    let userEmail = req.body.useremail;
     let userMessage = req.body.usermessage;
-    if (userEmail !== "" && userMessage !== "") {
+    if (userMessage !== "") {
       var newGuest = new Guest({
         "username": user.nickname || user.username,
-        "email": userEmail,
         "message": userMessage,
         "avatar": user.picture,
         "date": new Date().toDateString()
@@ -50,10 +49,8 @@ router.route('/')
 router.get('/:id', ensureAuthenticated, (req, res) => {
   Guest.findById(req.params.id, (e, guest) => {
     res.render('guest', {
-      name: guest.username,
-      email: guest.email,
-      message: guest.message,
-      avatar: guest.avatar
+      user: req.user,
+      guest: guest
     });
   });
 });
@@ -75,7 +72,7 @@ function ensureAuthenticated (req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   } else {
-    res.redirect('/');
+    res.redirect('/local_login');
   }
 };
 

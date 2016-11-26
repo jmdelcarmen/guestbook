@@ -2,31 +2,30 @@ extends layout
 
 block content
 
-              
-    .row.primary-content
-      p.text-xs-right
-        a(href="/guestbook/logout").logout Logout
-      h1.text-xs-center #{title}
-      div.logo
-        img(src="images/guestbook-icon.png")
-      p.text-xs-center
-        a(href="#").form-toggler Add note 
-      .row.guestlist-container.text-xs.center
-        each guest, i in guestlist
-          .col-xs-12.col-md-5.col-lg-3
-            p.guest-date= guest.date
-            div.guest-info.text-xs-center
-              a(href="/guestbook/#{guest._id}")
-                img.guest-img(src="#{guest.avatar}")
-                h3.guest-name= guest.username
-            p.guest-message= guest.message
-            if user.username === guest.username || user.nickname === guest.username
-              a(href="/guestbook/#{guest._id}/delete/")
-                i.fa.fa-trash
-                     
-     div.form-wrapper
-      h3.form-header Add note
-      form#formAddUser(name="adduser", method="post", action="/guestbook")
-          input#inputUserEmail(type="email", placeholder="Email", name="useremail" required)
-          textarea#inputUserMessage(type="text", placeholder="Message", name="usermessage")
-          button#btnSubmit(type="submit") Submit 
+            
+  .row.primary-content
+    h1.text-xs-center #{title}
+    div.logo
+      img(src="images/guestbook-icon.png")
+    p.text-xs-center
+      a(href="#").form-toggler Add note 
+    .row.guestlist-container.text-xs.center
+      each guest, i in guestlist.reverse()
+        .col-xs-12.col-md-5.col-lg-3
+          p.guest-date= guest.date
+          div.guest-info.text-xs-center
+            a(href="/guestbook/#{guest._id}")
+              img.guest-img(src="#{guest.avatar}")
+              h3.guest-name= guest.username
+          p.guest-message= guest.message
+          if user.username === guest.username || user.nickname === guest.username
+            a(href="/guestbook/#{guest._id}/delete/")
+              i.fa.fa-trash
+                   
+  div.bg-wrapper
+    form(method="post" action="/guestbook").col-xs-4.pb-2.login
+      h3.lead Add note
+      .form-group
+        label Message
+        textarea(placeholder="Add message..." name="usermessage" required)
+      button(type="submit") Submit
