@@ -1,4 +1,12 @@
 extends layout
 
 block content
-  p= guest
+    .col-xs-12
+      p.guest-date= guest.date
+      div.guest-info.text-xs-center
+          img.guest-img(src="#{guest.avatar}")
+          h3.guest-name= guest.username
+      p.guest-message= guest.message
+      if user.username === guest.username || user.nickname === guest.username
+        a(href="/guestbook/#{guest._id}/delete/")
+          i.fa.fa-trash    

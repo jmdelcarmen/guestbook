@@ -17,7 +17,7 @@ router.route('/').get((req, res) => {
 //Home page post///
 });
 
-/////////////////////////Local_Register/////////////////////////////
+/////////////////////////Local_Sinup/////////////////////////////
 
 router.route("/local_signup")
   .get((req, res) => {

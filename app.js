@@ -52,9 +52,10 @@ app.set('view engine', 'jade');
 /////////////////FILE UPLOAD///////////////////////
 app.use(multer({dest: 'public/uploads'}).single('profileImage'));
 /////////////////MIDDLEWARE///////////////////////
-app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(logger('dev'));
 app.use(cookieParser());
 app.use(session({
   secret: 'shhhhhhhhh',
@@ -63,7 +64,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 /////////////////////APIS//////////////////////
 app.use('/', require('./routes/index'));

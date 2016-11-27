@@ -43,9 +43,58 @@ h1 {
   border: 3px solid #444;
 }
 
+/*************HOMEPAGE STYLES*********************/
+
+.image-gallery .col-lg-4 {
+  position: relative;
+  padding: 0;
+}
+
+.image-gallery img {
+  width: 100%;
+  height: 100%;
+}
+
+.image-gallery .overlay:hover {
+  opacity: 1;
+}
+
+.image-gallery .overlay {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: .5s ease-in-out;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  padding: .5em;
+}
 
 
 
+
+
+/**************FOOTER***************/
+
+.content-wrapper {
+  min-height: calc(100vh - 200px);
+  margin-bottom: 200px;
+}
+
+.footer {
+  width: 100%;
+  background: #EA655B;
+  height: 200px;
+  text-align: center;
+}
+
+.footer i.fa {
+  display: inline-block;
+  font-size: 2em;
+  margin: 100px 10px 0;
+}
 
 
 
@@ -64,7 +113,7 @@ button:hover {
   cursor: pointer;
 }
 
-.logout, .form-toggler, .landing-page nav a {
+.form-toggler {
   color: white;
   font-size: 1em;
   font-weight: 500;
@@ -74,7 +123,7 @@ button:hover {
 }
 
 
-.logout:hover, .form-toggler:hover {
+.form-toggler:hover {
   background: white;
   color: #444;
   box-shadow: 0 0 6px black;
@@ -191,72 +240,6 @@ img[src*="guestbook"] {
 }
 
 
-/*************************USER MESSAGE FORM**************************/
-
-.form-wrapper{
-  width: 95%;
-  max-width: 400px;
-  margin-top: 2em;
-  margin: 0 auto;
-  margin-top: 2em;
-  padding: 1.5em;
-  background: #f1f1f1;
-  position: relative;
-}
-
-.form-header {
-  color: #E88024;
-  padding-top: .5em;
-}
-
-#formAddUser {
-  display: flex;
-  flex-flow: row wrap;
-}
-
-#formAddUser input, textarea  {
-  height: 45px;
-  width: 100%;
-  padding: .75em;
-  border: 2px solid rgba(0, 0, 0, 0.35);
-  border-radius: 3px;
-  margin: .7em 0;
-  color: rgba(0, 0, 0, 0.75);
-}
-
-textarea {
-  height: 180px;
-}
-
-button#btnSubmit {
-  height: 35px;
-  width: 70%;
-  margin: 0 auto;
-  margin-top: 1em;
-  border: 3px solid rgba(0, 0, 0, 0.35);
-  border-radius: 3px;
-  color: ivory;
-  background: #00CCFF;
-}
-
-.fa-close {
-  position: absolute;
-  top: 0;
-  right: 0px;
-  padding: 5px 10px 5px 20px;
-  color: rgba(0, 0, 0, 0.3);
-  font-size: 2em;
-  background: #f1f1f1;
-  border-radius: 3px;
-  transition: all .4s;
-}
-
-.fa-close:hover {
-  color: rgba(0, 0, 0, 0.8);
-  cursor: pointer;
-}
-
-
 /*************************USER LOGIN & REGISTER FORM**************************/
 
 .bg-wrapper {
@@ -324,4 +307,27 @@ button#btnSubmit {
 
 .login button:active, .signup button:active {
   background: #109177;
+}
+
+textarea {
+  height: 45px;
+  width: 100%;
+  padding: .75em;
+  border: 2px solid rgba(0, 0, 0, 0.35);
+  border-radius: 3px;
+  margin: .7em 0;
+  color: rgba(0, 0, 0, 0.75);
+  height: 180px;
+}
+
+.guestnote {
+  position: absolute;
+  transition: .4s ease-in-out;
+  top: -700px;
+  right: 0; left: 0;
+}
+
+.exit .fa {
+  cursor: pointer;
+  margin-right: .2em;
 }

@@ -19,7 +19,7 @@ router.route('/')
         guestlist: guests,
         title: "Guestbook",
         env: env,
-        user: req.user
+        user: req.user || null
       });
     });
   })

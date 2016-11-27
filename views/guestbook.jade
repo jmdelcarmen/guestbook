@@ -22,8 +22,10 @@ block content
             a(href="/guestbook/#{guest._id}/delete/")
               i.fa.fa-trash
                    
-  div.bg-wrapper
+  div.bg-wrapper.guestnote
     form(method="post" action="/guestbook").col-xs-4.pb-2.login
+      .exit.text-xs-right
+        i.fa.fa-times.fa-2x
       h3.lead Add note
       .form-group
         label Message
