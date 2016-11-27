@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background: #05232E;
 }
@@ -205,6 +209,7 @@ img[src*="guestbook"] {
 .guest-message {
   font-size: 13px;
   margin: 0 auto;
+  word-wrap: break-word;
   width: 95%;
   min-height: 100px;
   margin-bottom: 3em;
