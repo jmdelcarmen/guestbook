@@ -4,9 +4,16 @@ const router = express.Router();
 const Guest = require('../models/guest');
 const env = require('../app').env;
 
+
+
+
 router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
+});
+
+router.get('/addnote', ensureAuthenticated, (req, res) => {
+  res.render('addnote', {user: req.user});
 });
 
 //////////////////////GUESTBOOK////////////////////////////
@@ -66,6 +73,7 @@ router.get('/:id/delete/', ensureAuthenticated, (req, res) => {
   });
   res.redirect('/guestbook');
 });
+
 
 
 function ensureAuthenticated (req, res, next) {

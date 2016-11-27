@@ -8,7 +8,7 @@ block content
     div.logo
       img(src="images/guestbook-icon.png")
     p.text-xs-center
-      span.form-toggler Add note 
+      a(href="/guestbook/addnote").form-toggler Add note 
     .row.guestlist-container.text-xs.center
       each guest, i in guestlist.reverse()
         .col-xs-12.col-md-5.col-lg-3
@@ -22,12 +22,4 @@ block content
             a(href="/guestbook/#{guest._id}/delete/")
               i.fa.fa-trash
                    
-  div.bg-wrapper.guestnote
-    form(method="post" action="/guestbook").col-xs-4.pb-2.login
-      .exit.text-xs-right
-        i.fa.fa-times.fa-2x
-      h3.lead Add note
-      .form-group
-        label Message
-        textarea(placeholder="Add message..." name="usermessage" required)
-      button(type="submit") Submit
+  

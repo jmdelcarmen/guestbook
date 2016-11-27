@@ -309,7 +309,7 @@ textarea {
 .guestnote {
   position: absolute;
   transition: .4s ease-in-out;
-  top: -700px;
+  top: 0;
   right: 0; left: 0;
 }
 

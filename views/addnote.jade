@@ -1,0 +1,14 @@
+extends layout
+
+block content
+
+    div.bg-wrapper.guestnote
+      form(method="post" action="/guestbook").col-xs-4.pb-2.login
+        a(href="/guestbook")
+          .exit.text-xs-right
+            i.fa.fa-times.fa-2x
+        h3.lead Add note
+        .form-group
+          label Message
+          textarea(placeholder="Add message..." name="usermessage" required)
+        button(type="submit") Submit
