@@ -45,55 +45,41 @@ h1 {
 
 /*************HOMEPAGE STYLES*********************/
 
-.image-gallery .col-lg-4 {
-  position: relative;
-  padding: 0;
-}
-
-.image-gallery img {
-  width: 100%;
-  height: 100%;
-}
-
-.image-gallery .overlay:hover {
-  opacity: 1;
-}
-
-.image-gallery .overlay {
+.landing-container {
   position: absolute;
-  background: rgba(0, 0, 0, 0.4);
-  opacity: 0;
-  transition: .5s ease-in-out;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  color: #fff;
-  padding: .5em;
+  top: 35%;
+  right: 30%; left: 30%;
+  border: 2px solid white;
+  padding: 1em;
+  background: rgba(255, 255, 255, 0.05);
 }
 
-
-
+.landing-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 6em;
+  color: white;
+  width: 100%;
+}
 
 
 /**************FOOTER***************/
 
 .content-wrapper {
-  min-height: calc(100vh - 200px);
-  margin-bottom: 200px;
+  min-height: calc(100vh - 100px);
+  position: relative;
 }
 
 .footer {
   width: 100%;
   background: #EA655B;
-  height: 200px;
+  height: 100px;
   text-align: center;
 }
 
 .footer i.fa {
   display: inline-block;
   font-size: 2em;
-  margin: 100px 10px 0;
+  margin: 30px 10px 0;
 }
 
 
