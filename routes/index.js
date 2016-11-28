@@ -10,7 +10,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const multer = require('multer');
 const upload = multer({dest: 'public/uploads'});
 
-////////////////////////HOME PAGE//////////////////////////
+//////////////////////////HOME PAGE//////////////////////////////
 router.route('/').get((req, res) => {
   res.render('index', {user: req.user});
 }).post((req, res) => {
@@ -35,12 +35,15 @@ router.route("/local_signup")
       picture: picture,
       date_created: new Date().toDateString()
     });
-    newUser.save((e, data) => {
-      if(e) throw e;
+    newUser.save((err, data) => {
+      if(err) {
+
+      }
       console.log('successfully registered the user');
       console.log(newUser);
+      req.flash('success', 'You are now registered and can login.');
     });
-    res.redirect('/');
+    res.redirect('/local_login');
   });
 
 
@@ -51,7 +54,7 @@ router.route('/local_login')
     res.render('localauth/local_login');
   })
   .post(passport.authenticate('local', {failureRedirect: '/local_login'}), (req, res) => {
-    // req.flash('success', 'You are now logged in');
+    req.flash('success', 'You are now logged in');
     res.redirect('/guestbook');
   });
 

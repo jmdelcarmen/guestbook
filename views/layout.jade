@@ -32,6 +32,7 @@ html
             a(href="guestbook/logout") Logout
             img(src="#{user.picture}")
             
+    != messages()        
     div.container.content-wrapper
       block content
     .footer

@@ -46,6 +46,13 @@ const mongoose = require('mongoose');
 mongoose.connect(process.env.DB_URI || 'mongodb://localhost/guestbook');
 const app = express();
 
+//Flash messages
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+  res.locals.messages = require('express-messages')(req, res);
+  next();
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

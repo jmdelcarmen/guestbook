@@ -322,3 +322,58 @@ textarea {
   cursor: pointer;
   margin-right: .2em;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**************FLASH STYLES*****************/
+
+ul.success li {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #fff;
+  text-align: center;
+  background: #5CB860;
+  border-color: #d6e9c6;
+  list-style: none;
+  opacity: .75;
+}
+
+ul.info li {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #fff;
+  text-align: center;
+  background: #6ABCC2;
+  border-color: #d6e9c6;
+  list-style: none;
+  opacity: .75;
+}
+
+ul.error li {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #fff;
+  text-align: center;
+  background: #D22827;
+  border-color: #d6e9c6;
+  list-style: none;
+  opacity: .75;
+}
