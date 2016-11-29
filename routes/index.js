@@ -27,7 +27,7 @@ router.route("/local_signup")
     console.log(req.body);
     console.log(req.file);
     let picture = '';
-    req.file ? picture = `/uploads/${req.file.filename}` : picture = 'https://s-media-cache-ak0.pinimg.com/originals/7d/da/38/7dda385ed3724fea700d45a0349d9e77.png'
+    req.file ? picture = `uploads/${req.file.filename}` : picture = 'https://s-media-cache-ak0.pinimg.com/originals/7d/da/38/7dda385ed3724fea700d45a0349d9e77.png'
     let newUser = new User({
       username: req.body.username,
       password: bcrypt.hashSync(req.body.password, 10),
