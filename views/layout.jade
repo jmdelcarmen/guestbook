@@ -10,7 +10,7 @@ html
     link(rel='stylesheet', href='/stylesheets/main.css')
     script(src="https://cdn.auth0.com/js/lock/10.3/lock.min.js")
     
-    nav.navbar.navbar-light.bg-faded
+    nav.navbar
       .container.text-xs-right
         .col-lg-8
           a.navbar-brand(href='/guestbook') Guestbook
@@ -27,8 +27,8 @@ html
         .col-xs-4
           if user
             a(href="/").mx-1 Home
-            a(href="guestbook/logout") Logout
-            img(src="/#{user.picture}")
+            a(href="/guestbook/logout") Logout
+            img(src="#{user.picture}")
             
     != messages()        
     div.container.content-wrapper

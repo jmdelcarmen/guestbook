@@ -24,8 +24,14 @@ h1 {
 }
 
 /****************NAVBAR STYLES********************/
+
 .navbar a {
-  color: #444;
+  color: #fff !important;
+  transition: .4s all;
+}
+
+.navbar a:hover {
+  opacity: .7;
 }
 
 .navbar-brand {
@@ -69,13 +75,13 @@ h1 {
 /**************FOOTER***************/
 
 .content-wrapper {
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 160px);
   position: relative;
 }
 
 .footer {
   width: 100%;
-  background: #EA655B;
+  background: #ddd;
   height: 100px;
   text-align: center;
 }
@@ -84,6 +90,7 @@ h1 {
   display: inline-block;
   font-size: 2em;
   margin: 30px 10px 0;
+  color: black;
 }
 
 
@@ -135,9 +142,9 @@ img[src*="guestbook"] {
 
 .primary-content {
   padding: 2em;
-  margin-top: 2em;
+  margin: 2em 0;
   border-radius: 4px;
-  border: 15px solid rgba(0,0,0,0.5);
+  border: 7px solid rgba(0,0,0,0.5);
   background: #ea655b;
 }
 

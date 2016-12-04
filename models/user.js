@@ -5,7 +5,7 @@ const userModel = function () {
 
   let userSchema = mongoose.Schema({
     username: {type: String, unique: true, required: true},
-    password: String,
+    password: {type: String},
     email: {type: String, unique: true, required: true},
     picture: {type: String},
     date_created: {type: Date, default: Date.now}

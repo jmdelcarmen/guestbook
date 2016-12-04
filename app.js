@@ -2,48 +2,23 @@
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
-const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-/////////////////AuthO////////////////////
+/////////////////Auth////////////////////
 const session = require('express-session');
 const passport = require('passport');
-const Auth0Strategy = require('passport-auth0');
+const authConfig = require('./routes/auth_config');
 ////////////Multer file uploader//////////////
 const multer = require('multer');
 const upload = multer({dest: 'public/uploads'});
-
 require('dotenv').config();
 
-module.exports.env = {
-  AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
-  AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
-  AUTH0_CALLBACK_URL: process.env.AUTH0_CALLBACK_URL
-};
-
-
-// This will configure Passport to use Auth0
-const strategy = new Auth0Strategy({
-    domain:       process.env.AUTH0_DOMAIN,
-    clientID:     process.env.AUTH0_CLIENT_ID,
-    clientSecret: process.env.AUTH0_CLIENT_SECRET,
-    callbackURL:  process.env.AUTH0_CALLBACK_URL
-  }, (accessToken, refreshToken, extraParams, profile, done) => {
-    // extraParams.id_token has the JSON Web Token
-    // profile has all the information from the user
-    return done(null, profile);
-  });
-
-passport.use(strategy);
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-passport.deserializeUser((user, done) => {
-  done(null, user);
-});
+//routes
+const index = require('./routes/index');
+const guestbook = require('./routes/guestbook');
 
 ////////////////Mongo DB///////////////////
 const mongoose = require('mongoose');
-mongoose.connect(process.env.DB_URI || 'mongodb://localhost/guestbook');
+mongoose.connect(process.env.DB_URI  || 'mongodb://localhost/guestbook');
 const app = express();
 
 //Flash messages
@@ -56,14 +31,14 @@ app.use(function (req, res, next) {
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-/////////////////FILE UPLOAD///////////////////////
-app.use(multer({dest: 'public/uploads'}).single('profileImage'));
-/////////////////MIDDLEWARE///////////////////////
+
+//middleware
+app.use(multer({dest: 'public/uploads'}).single('profileImage')); //file upload
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
-app.use(cookieParser());
+//auth
 app.use(session({
   secret: 'shhhhhhhhh',
   resave: true,
@@ -72,15 +47,34 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+//auth strategy
+passport.use(authConfig.auth0Strategy);
+authConfig.auth0();
+passport.use(authConfig.localStrategy);
+authConfig.localAuth();
 
-/////////////////////APIS//////////////////////
-app.use('/', require('./routes/index'));
-app.use('/guestbook', require('./routes/guestbook'));
+//APIS//
+//index
+app.get('/', index.landingPage);
+app.get('/local_signup', index.showLocalSignup);
+app.post('/local_signup', index.signupUser);
+app.get('/local_login', index.showLocalLogin);
+app.post('/local_login', passport.authenticate('local', {failureRedirect: '/local_login'}), index.loginUser);
+app.get('/auth0_login', index.showAuth0Lock);
+app.get('/callback', passport.authenticate('auth0', { failureRedirect: '/' }), index.loginUser);
+//guestbook
+app.use(authConfig.ensureAuthenticated); //auth user
+app.get('/guestbook', guestbook.showGuestbook);
+app.post('/guestbook/note/add', guestbook.addNote);
+app.get('/guestbook/note/remove/:id', guestbook.removeNote);
+app.get('/guestbook/note/:id', guestbook.showGuestNote);
+app.get('/guestbook/logout', guestbook.logout);
+app.get('/guestbook/addnote', guestbook.showAddNote);
+
 
 app.get('*', (req, res, next) => {
   module.locals.user = req.user || null;
 });
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -115,5 +109,5 @@ app.use(function(err, req, res, next) {
 
 
 
-module.exports = app;
 console.log('Awesomeness is happening at port 3000...');
+module.exports = app;

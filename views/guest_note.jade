@@ -8,5 +8,5 @@ block content
           h3.guest-name= guest.username
       p.guest-message= guest.message
       if user.username === guest.username || user.nickname === guest.username
-        a(href="/guestbook/#{guest._id}/delete/")
+        a(href="/guestbook/note/remove/#{guest._id}")
           i.fa.fa-trash    
