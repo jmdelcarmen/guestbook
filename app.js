@@ -20,6 +20,7 @@ const guestbook = require('./routes/guestbook');
 const mongoose = require('mongoose');
 mongoose.connect(process.env.DB_URI  || 'mongodb://localhost/guestbook');
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 //Flash messages
 app.use(require('connect-flash')());
@@ -110,6 +111,6 @@ app.use(function(err, req, res, next) {
 
 
 
-app.listen(3000, () => {
-  console.log('Awesomeness is happening at port 3000...');  
+app.listen(PORT, () => {
+  console.log('Awesomeness is happening at port 3000...');
 })
