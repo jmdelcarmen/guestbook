@@ -109,5 +109,7 @@ app.use(function(err, req, res, next) {
 
 
 
-console.log('Awesomeness is happening at port 3000...');
-module.exports = app;
+
+app.listen(3000, () => {
+  console.log('Awesomeness is happening at port 3000...');  
+})
