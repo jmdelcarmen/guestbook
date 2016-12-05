@@ -1,17 +1,15 @@
 extends layout
 
-block content
-        
+block content   
+
   .row.primary-content
-    button(ng-click="back()") Back
-    button(ng-click="next()") Next
     h1.text-xs-center Guestbook
     div.logo
       img(src="images/guestbook-icon.png")
     p.text-xs-center
       a(href="/guestbook/addnote").form-toggler Add note 
     .row.guestlist-container.text-xs.center
-      .col-xs-12.col-md-5.col-lg-3(ng-repeat="note in notes.reverse().slice(((page-1)*5), page*5)")
+      .col-xs-12.col-md-5.col-lg-3(ng-repeat="note in notes.reverse() | limitTo: page*5")
         p.guest-date {{note.date}}
         div.guest-info.text-xs-center
           a(href="/guestbook/note/{{note._id}}")
@@ -20,5 +18,5 @@ block content
         p.guest-message {{note.message}}
         a(href="/guestbook/note/remove/{{note._id}}" ng-if="user.nickname === note.username || user.username === note.username")
           i.fa.fa-trash
-                   
+    button(ng-if="page < maxpages" ng-click="loadMore()" class="btn btn-primary btn-block") Load more ...
   

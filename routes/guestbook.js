@@ -68,6 +68,7 @@ exports.removeNote = (req, res) => {
 
 exports.showNotes = (req, res) => {
   Guest.find({}, (err, notes) => {
+    res.status(200);
     res.json({notes: notes, user: req.user});
     res.end();
   });
