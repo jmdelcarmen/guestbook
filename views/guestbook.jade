@@ -1,25 +1,24 @@
 extends layout
 
 block content
-
-            
+        
   .row.primary-content
-    h1.text-xs-center #{title}
+    button(ng-click="back()") Back
+    button(ng-click="next()") Next
+    h1.text-xs-center Guestbook
     div.logo
       img(src="images/guestbook-icon.png")
     p.text-xs-center
       a(href="/guestbook/addnote").form-toggler Add note 
     .row.guestlist-container.text-xs.center
-      each guest, i in guestlist.reverse()
-        .col-xs-12.col-md-5.col-lg-3
-          p.guest-date= guest.date
-          div.guest-info.text-xs-center
-            a(href="/guestbook/note/#{guest._id}")
-              img.guest-img(src="#{guest.avatar}")
-              h3.guest-name= guest.username
-          p.guest-message= guest.message
-          if user.username === guest.username || user.nickname === guest.username
-            a(href="/guestbook/note/remove/#{guest._id}")
-              i.fa.fa-trash
+      .col-xs-12.col-md-5.col-lg-3(ng-repeat="note in notes.reverse().slice(((page-1)*5), page*5)")
+        p.guest-date {{note.date}}
+        div.guest-info.text-xs-center
+          a(href="/guestbook/note/{{note._id}}")
+            img.guest-img(src="{{note.avatar}}")
+            h3.guest-name {{note.username}}
+        p.guest-message {{note.message}}
+        a(href="/guestbook/note/remove/{{note._id}}" ng-if="user.nickname === note.username || user.username === note.username")
+          i.fa.fa-trash
                    
   

@@ -1,5 +1,5 @@
 doctype html
-html
+html(ng-app="guestbook")
   head
     title= title
     link(rel='shortcut icon', href='')
@@ -9,6 +9,9 @@ html
     link(rel='stylesheet', href='/stylesheets/normalize.css')
     link(rel='stylesheet', href='/stylesheets/main.css')
     script(src="https://cdn.auth0.com/js/lock/10.3/lock.min.js")
+    
+    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
+    script(src="/javascripts/index.js")
     
     nav.navbar
       .container.text-xs-right
@@ -25,13 +28,13 @@ html
               li.nav-item
                 a.nav-link(href='/auth0_login') Auth0
         .col-xs-4
-          if user
+          if (user)
             a(href="/").mx-1 Home
             a(href="/guestbook/logout") Logout
             img(src="#{user.picture}")
             
     != messages()        
-    div.container.content-wrapper
+    div.container.content-wrapper(ng-controller="mainCtrl")
       block content
     .footer
       a(href="https://github.com/jmdelcarmen" target="blank")

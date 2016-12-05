@@ -56,6 +56,7 @@ authConfig.localAuth();
 
 //APIS//
 //index
+
 app.get('/', index.landingPage);
 app.get('/local_signup', index.showLocalSignup);
 app.post('/local_signup', index.signupUser);
@@ -65,6 +66,7 @@ app.get('/auth0_login', index.showAuth0Lock);
 app.get('/callback', passport.authenticate('auth0', { failureRedirect: '/' }), index.loginUser);
 //guestbook
 app.use(authConfig.ensureAuthenticated); //auth user
+app.get('/api/getnotes', guestbook.showNotes);
 app.get('/guestbook', guestbook.showGuestbook);
 app.post('/guestbook/note/add', guestbook.addNote);
 app.get('/guestbook/note/remove/:id', guestbook.removeNote);

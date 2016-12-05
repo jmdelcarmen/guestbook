@@ -7,6 +7,6 @@ block content
           img.guest-img(src="#{guest.avatar}")
           h3.guest-name= guest.username
       p.guest-message= guest.message
-      if user.username === guest.username || user.nickname === guest.username
+      if (user.username === guest.username || user.nickname === guest.username)
         a(href="/guestbook/note/remove/#{guest._id}")
           i.fa.fa-trash    

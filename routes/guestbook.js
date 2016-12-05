@@ -13,15 +13,17 @@ exports.showAddNote = (req, res) => {
 }
 
 exports.showGuestbook = (req, res) => {
-  Guest.find({}, (e, guests) => {
-    if (e) throw e;
-     res.render('guestbook', {
-      guestlist: guests,
-      title: "Guestbook",
-      env: env,
-      user: req.user || null
-    });
-  });
+  // Guest.find({}, (e, guests) => {
+  //   if (e) throw e;
+  //    res.render('guestbook', {
+  //     guestlist: guests,
+  //     title: "Guestbook",
+  //     env: env,
+  //     user: req.user || null
+  //   });
+  // });
+
+  res.render('guestbook', {user: req.user});
 }
 
 exports.addNote = (req, res) => {
@@ -62,4 +64,11 @@ exports.removeNote = (req, res) => {
     console.log('Message successfully deleted.');
   });
   res.redirect('/guestbook');
+}
+
+exports.showNotes = (req, res) => {
+  Guest.find({}, (err, notes) => {
+    res.json({notes: notes, user: req.user});
+    res.end();
+  });
 }
