@@ -62,15 +62,15 @@ h1 {
   border: 2px solid white;
   padding: 1em;
   background: rgba(255, 255, 255, 0.05);
+  text-align: center;
 }
 
 .landing-title {
   font-family: 'Great Vibes', cursive;
-  font-size: 6em;
+  font-size: 4em;
   color: white;
   width: 100%;
 }
-
 
 /**************FOOTER***************/
 
@@ -96,14 +96,6 @@ h1 {
 
 
 
-
-
-
-
-
-
-
-
 /**********************************/
 
 button:hover {
@@ -118,7 +110,6 @@ button:hover {
   border: 2px solid white;
   transition: .3s;
 }
-
 
 .form-toggler:hover {
   background: white;
@@ -329,19 +320,6 @@ textarea {
   cursor: pointer;
   margin-right: .2em;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /**************FLASH STYLES*****************/
